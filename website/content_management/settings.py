@@ -41,8 +41,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 APPEND_SLASH = False
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','6dcf7f2a56c54302b3d42e1d83432aee.vfs.cloud9.eu-west-1.amazonaws.com']
+CSRF_TRUSTED_ORIGINS = ['https://6dcf7f2a56c54302b3d42e1d83432aee.vfs.cloud9.eu-west-1.amazonaws.com']
 # ALLOWED_HOSTS = ['c538a7940a044a449b3f53e560c564fb.vfs.cloud9.eu-west-1.amazonaws.com', 'x22217029ContentDevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com','x22217029contentdevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com']
 # CSRF_TRUSTED_ORIGINS = ['https://c538a7940a044a449b3f53e560c564fb.vfs.cloud9.eu-west-1.amazonaws.com', 'http://x22217029ContentDevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com','http://x22217029contentdevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com']
 
@@ -110,25 +110,25 @@ WSGI_APPLICATION = "content_management.wsgi.application"
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'medium',
-        'USER': 'gb',
-        'PASSWORD': 'passwd',
-        'HOST':'localhost',
-        'PORT':'3306',
-    }
-}
-
-# credentials_file = os.path.join(BASE_DIR, 'aws_services', 'db_credentials.json')
-# with open(credentials_file) as f:
-#     credentials = json.load(f)
-
-# # Updating DATABASES setting with loaded credentials
 # DATABASES = {
-#     'default': credentials['database']
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'medium',
+#         'USER': 'gb',
+#         'PASSWORD': 'passwd',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#     }
 # }
+
+credentials_file = os.path.join(BASE_DIR, 'aws_services', 'db_credentials.json')
+with open(credentials_file) as f:
+    credentials = json.load(f)
+
+# Updating DATABASES setting with loaded credentials
+DATABASES = {
+    'default': credentials['database']
+}
 
 
 

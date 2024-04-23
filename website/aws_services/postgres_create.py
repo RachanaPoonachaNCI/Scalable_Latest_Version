@@ -2,13 +2,13 @@ import boto3
 import json
 
 def create_rds_instance(secretPassword):
-    db_instance_identifier = 'x22217029-postgres-db-devsecops'
+    db_instance_identifier = 'x22217029-postgres-db-scalable'
     db_instance_class = 'db.t3.micro'
     db_name = 'ContentManager'
     master_username = 'x22217029'
-    secret_name = 'x22217029-postgres-devsecops'
+    secret_name = 'x22217029-content-manager-postgres-secret'
     allocated_storage = 20
-    security_group_ids = ['sg-08951623fb0f48bea']
+    security_group_ids = ['sg-06f9cd2cc5bcaa9bd']
 
 
     rds = boto3.client('rds')
