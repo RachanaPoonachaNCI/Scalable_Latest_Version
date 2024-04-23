@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, 
+						initial-scale=1.0">
+	<title>Title</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,700");
+        @import url("https://fonts.googleapis.com/css?family=Lato:400,400i,700");
+
+        body {
+        font-family: Lato, sans-serif;
+        }
+
+        a {
+        text-decoration: none;
+        color: #000;
+        }
+        .site-header { 
+        font-family: Helvetica;
+        border-bottom: 1px solid #ccc;
+        padding: .5em 1em;
+        display: flex;
+        justify-content: space-between;
+        }
+
+        .site-identity h1 {
+        font-size: 1.5em;
+        margin: .6em 0;
+        display: inline-block;
+        }
+
+
+        .site-navigation ul, 
+        .site-navigation li {
+        margin: 0; 
+        padding: 0;
+        }
+
+        .site-navigation li {
+        display: inline-block;
+        margin: 1.4em 1em 1em 1em;
+        }
+
+        .container {
+        display: grid;
+        grid-template-columns: 4rem 3fr 1fr 2rem;
+        margin-top: 2rem;
+        grid-column-gap: 2rem;
+        }
+
+        .header {
+        grid-column: 2 / 5;
+        }
+
+        .heading {
+        font-family: Montserrat, sans-serif;
+        }
+
+        .header .subheading {
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        font-size: smaller;
+        color: #455A64;
+        }
+
+        .content {
+        grid-column: 2 / 3;
+        text-align: justify;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        }
+
+        .content .poster-image {
+        width: 100%;
+        object-fit: cover;
+        }
+
+        .aside .heading {
+        margin: 0;
+        font-weight: 600;
+        }
+
+        .footer {
+        grid-column: 1 / 5;
+        background-color: #37474F;
+        padding: 0.7rem 1rem;
+        margin-top: 3rem;
+        text-align: right;
+        }
+
+        .footer .author {
+          font-size : 20px;
+        }
+
+        .subscribe {
+          font-size : 20px;
+          color: rgb(219, 208, 193);
+        }
+
+        @media only screen and (max-width: 600px) {
+        .container {
+            grid-template-columns: 2rem 3fr 1fr 2rem;
+        }
+        .content {
+            grid-column: 2 / 4;
+        }
+        .aside {
+            grid-column: 2 / 4;
+        }
+        }
+
+        .card {
+        height: 5rem;
+        display: flex;
+        align-items: center;
+        text-transform: capitalize;
+        margin: 1rem 0;
+        cursor: pointer;
+        }
+
+        .card img {
+        height: 100%;
+        width: 40%;
+        margin-right: 0.5rem;
+        }
+
+        .card p {
+        margin: 0;
+        }
+
+        .card .title {
+        font-size: 0.8rem;
+        }
+
+        .card .subheading {
+        font-size: small;
+        }
+    </style>
+</head>
+  <body>
+    <header class="site-header">
+        <div class="site-identity">
+          <h1><a href="#"></a></h1>
+        </div>  
+        <nav class="site-navigation">
+          <ul class="nav">
+            <select name="Language" id="lang" onchange="langChange()">
+              <option value="English">English </option>
+              <option value="Irish">Irish </option>
+              <option value="German">German </option>
+              <option value="Hindi">Mercedes</option>
+              <option value="Spanish">Spanish</option>
+              <option value="Swedish">Swedish</option>
+              <option value="French">French</option>
+              <option value="Russian">Russian</option>
+              <option value="Dutch">Dutch</option>
+              <option value="Italian">Italian</option>
+              <option value="Arabic">Arabic</option>
+              <option value="Japanese">Japanese</option>
+            </select>
+            <li><a href="/">All Posts</a></li> 
+            <li><a href="/auth/logout/">Logout</a></li> 
+          </ul>
+        </nav>
+      </header>
+    <div class="body">
+        <main class="container">
+            <header class="header">
+              <p class="subheading">{{ subheading }}</p>
+              <h1 class="heading">{{ title }}</h1>
+            </header>
+            <section class="content">
+              <img src='{{ image }}' alt='large-image' class="poster-image">
+              {{ content }}
+            </section>
+            <aside class="aside">
+              {% if isSubscribed %}
+              <a class="subscribe" href="/post/subscribe/{{ id }}/">
+                <p class="subscribe">Subscribe</p>
+              </a>
+              <br/>
+              {% endif %}
+              <h4 class="heading">Other posts by the author</h4>
+              {% for suggestion in suggestions %}
+              <a class="card" href="/post/{{ suggestion.id }}/English">
+                <img src='{{ suggestion.image }}' alt=''>
+                <div>
+                  <p class="heading title">{{ suggestion.title }}</p>
+                  <p class="subheading">{{ suggestion.subheading }}</p>
+                </div>
+              </a>
+              {% endfor %}
+            </aside>
+            <footer class="footer">
+              <p class="author"> Share Link: &nbsp {{ share_link }} </p>
+              <p class="author"> Author: &nbsp {{ author }} </p>
+            </footer>
+          </main>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event){
+      document.getElementById("lang").value = "{{ lang }}"
+    });
+    function langChange(){
+      const a = document.createElement('a')
+      a.href = '/post/{{ id }}/'+document.getElementById("lang").value
+      a.click()
+    }
+  </script>
+  </body>
+</html>
