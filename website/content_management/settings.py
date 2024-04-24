@@ -41,8 +41,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 APPEND_SLASH = False
-ALLOWED_HOSTS = ['127.0.0.1','localhost','6dcf7f2a56c54302b3d42e1d83432aee.vfs.cloud9.eu-west-1.amazonaws.com']
-CSRF_TRUSTED_ORIGINS = ['https://6dcf7f2a56c54302b3d42e1d83432aee.vfs.cloud9.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1','localhost','6dcf7f2a56c54302b3d42e1d83432aee.vfs.cloud9.eu-west-1.amazonaws.com','3ada1c66e1d043d5987461a27281f403.vfs.cloud9.eu-west-1.amazonaws.com','34.242.167.183']
+CSRF_TRUSTED_ORIGINS = ['https://6dcf7f2a56c54302b3d42e1d83432aee.vfs.cloud9.eu-west-1.amazonaws.com','https://3ada1c66e1d043d5987461a27281f403.vfs.cloud9.eu-west-1.amazonaws.com','https://127.0.0.1','https://34.242.167.183']
 # ALLOWED_HOSTS = ['c538a7940a044a449b3f53e560c564fb.vfs.cloud9.eu-west-1.amazonaws.com', 'x22217029ContentDevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com','x22217029contentdevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com']
 # CSRF_TRUSTED_ORIGINS = ['https://c538a7940a044a449b3f53e560c564fb.vfs.cloud9.eu-west-1.amazonaws.com', 'http://x22217029ContentDevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com','http://x22217029contentdevsecops-env.eba-pqae37np.eu-west-1.elasticbeanstalk.com']
 

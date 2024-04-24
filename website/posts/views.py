@@ -10,6 +10,7 @@ import json
 from config import API_BASE,SERVER_BASE
 import requests
 import threading
+#Enabling API Flow
 TOGGLE_USE_API = True
 
 def generate_qr_code(web_url):
@@ -21,11 +22,24 @@ def send_notification(reader,post):
     return
 
 def get_shortened_url(web_url):
-    # Handle shortned url API call
-    url = "https://ulvis.net/api.php?url="+web_url
-    print(f"API call to : {url}")
-    res = requests.get(url)
-    return str(res.content)[2:][:-1]
+    # # Handle shortned url API call
+    # url = "https://ulvis.net/api.php?url="+web_url
+    # print(f"API call to : {url}")
+    # res = requests.get(url)
+    # print(res.content)
+    # return str(res.content)[2:][:-1]
+
+    url = "https://url-shortener-service.p.rapidapi.com/shorten"
+    payload = { "url": web_url }
+    headers = {
+    	"content-type": "application/x-www-form-urlencoded",
+    	"X-RapidAPI-Key": "ac15937f22mshfd5e688ea48e4d5p12dd30jsn3392ac1353d4",
+    	"X-RapidAPI-Host": "url-shortener-service.p.rapidapi.com"
+                 }
+    response = requests.post(url, data=payload, headers=headers)
+    return response.json()['result_url']
+
+#print(response.json())
 
 def get_all_posts():
     url = API_BASE+'/posts'
@@ -260,7 +274,8 @@ def postDetails(request, id, lang):
             "suggestions": suggestions,
             "content": get_translation(postObject["content"],lang) if translated else postObject["content"],
             "isSubscribed" : subscribed,
-            "share_link" : get_shortened_url(SERVER_BASE+f"/post/{postObject["id"]}/{lang}"),
+          #  "share_link" : get_shortened_url(SERVER_BASE+f"/post/{postObject["id"]}/{lang}"),
+            "share_link": get_shortened_url("{}/post/{}/{}".format(SERVER_BASE, postObject["id"], lang)),
             "lang" : lang
         }
         return render(request, "details.html", context=data)
@@ -399,6 +414,7 @@ def subscribe(request,post=None):
 
 @csrf_exempt
 def serve_image(request):
+    print(request.body)
     req_body = json.loads(request.body.decode('utf-8'))
     post_obj = models.post.objects.get(id=req_body["post"])
     image_url = post_obj.image.url 
