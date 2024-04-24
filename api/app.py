@@ -23,10 +23,16 @@ app = FastAPI(
 )
 
 def get_img_address(post_id):
-    url = SERVER_BASE_URL+'/post/image/address/'
-    myobj = {'post': post_id}
-    res = requests.post(url, json = myobj)
-    return SERVER_BASE_URL+res.json()['url']
+    # url = SERVER_BASE_URL+'/post/image/address/'
+    # myobj = {'post': post_id}
+    # res = requests.post(url, json = myobj)
+    # print(res.status_code)
+    query = session.query(Post).filter( Post.id == post_id)
+    result = query.all()
+    posts = []
+    for  post in result:
+        return SERVER_BASE_URL+'/media/'+post.image
+    #return SERVER_BASE_URL+res.json()['url']
 
 @app.get("/posts")
 def get_all_posts():
@@ -118,4 +124,4 @@ def get_post_details(id: int):
         return {"status":"failure"}
         
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=5000)
+    uvicorn.run(app, host="0.0.0.0", port=8081)

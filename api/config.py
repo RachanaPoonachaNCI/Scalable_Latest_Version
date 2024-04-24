@@ -1,2 +1,2 @@
-SERVER_BASE_URL = "http://localhost:8000"
-SQLALCHEMY_DATABASE_URL = 'mysql://gb:passwd@localhost/medium'
+SERVER_BASE_URL = "https://3ada1c66e1d043d5987461a27281f403.vfs.cloud9.eu-west-1.amazonaws.com"
+SQLALCHEMY_DATABASE_URL = 'postgresql://x22217029:Admin123@x22217029-postgres-db-scalable.cna86ycki0e1.eu-west-1.rds.amazonaws.com/ContentManager'
